@@ -1,0 +1,88 @@
+[clone-repository : clone] + CHECKOUT_DIR=/workspace/output/
+[clone-repository : clone] + [[ true == \t\r\u\e ]]
+[clone-repository : clone] + cleandir
+[clone-repository : clone] + [[ -d /workspace/output/ ]]
+[clone-repository : clone] + rm -rf /workspace/output//lost+found
+[clone-repository : clone] + rm -rf '/workspace/output//.[!.]*'
+[clone-repository : clone] + rm -rf '/workspace/output//..?*'
+[clone-repository : clone] + test -z ''
+[clone-repository : clone] + test -z ''
+[clone-repository : clone] + test -z ''
+[clone-repository : clone] + /ko-app/git-init -url https://github.com/agdel1921/express-sample-app -revision '' -refspec '' -path /workspace/output/ -sslVerify=true -submodules=true -depth 1
+[clone-repository : clone] {"level":"info","ts":1628656128.4088912,"caller":"git/git.go:157","msg":"Successfully cloned https://github.com/agdel1921/express-sample-app @ 5c15fad91996ea40aeb800842062d02cf13f66bb (grafted, HEAD) in path /workspace/output/"}
+[clone-repository : clone] {"level":"info","ts":1628656128.7328274,"caller":"git/git.go:198","msg":"Successfully initialized and updated submodules in path /workspace/output/"}
+[clone-repository : clone] + cd /workspace/output/
+[clone-repository : clone] ++ git rev-parse HEAD
+[clone-repository : clone] + RESULT_SHA=5c15fad91996ea40aeb800842062d02cf13f66bb
+[clone-repository : clone] + EXIT_CODE=0
+[clone-repository : clone] + '[' 0 '!=' 0 ']'
+[clone-repository : clone] + echo -n 5c15fad91996ea40aeb800842062d02cf13f66bb
+[clone-repository : clone] + echo -n https://github.com/agdel1921/express-sample-app
+
+[run-tests : npm-run] added 479 packages in 5.789s
+[run-tests : npm-run] 
+[run-tests : npm-run] > express-sample-app@0.0.0 test /workspace/source
+[run-tests : npm-run] > jest
+[run-tests : npm-run] 
+[run-tests : npm-run] PASS ./sample.test.js
+[run-tests : npm-run]   A sample test
+[run-tests : npm-run]     ✓ used for demonstrative purposes (3 ms)
+[run-tests : npm-run] 
+[run-tests : npm-run] Test Suites: 1 passed, 1 total
+[run-tests : npm-run] Tests:       1 passed, 1 total
+[run-tests : npm-run] Snapshots:   0 total
+[run-tests : npm-run] Time:        0.511 s
+[run-tests : npm-run] Ran all test suites.
+
+[build-image : build] + buildah --storage-driver=overlay bud --format=oci --tls-verify=true --no-cache -f ./Dockerfile -t quay.io/ashutosh_gaur/express-sample-app:5c15fad91996ea40aeb800842062d02cf13f66bb .
+[build-image : build] STEP 1: FROM quay.io/upslopeio/node-alpine
+[build-image : build] Getting image source signatures
+[build-image : build] Copying blob sha256:fdd4ce4fd760cc2dc2cd21003bda974f04fa4c6dc16a0eaaee0606e5134b28e9
+[build-image : build] Copying blob sha256:0040dd60b7a47c7eb81961c48a17926755b00598f9753a499156bb0de7081dd9
+[build-image : build] Copying blob sha256:b78962e1a5c8c974c4663e987d7b61e6c80a85d7042819e99b031c377007d69f
+[build-image : build] Copying blob sha256:540db60ca9383eac9e418f78490994d0af424aab7bf6d0e47ac8ed4e2e9bcbba
+[build-image : build] Copying config sha256:48de5d16038cc532b2b5ef91f8d1028f5542b8196f5c6eced9c172894a7af337
+[build-image : build] Writing manifest to image destination
+[build-image : build] Storing signatures
+[build-image : build] STEP 2: WORKDIR /usr/src/app
+[build-image : build] STEP 3: COPY package*.json ./
+[build-image : build] STEP 4: RUN npm ci
+[build-image : build] 
+[build-image : build] added 479 packages, and audited 480 packages in 12s
+[build-image : build] 
+[build-image : build] 1 moderate severity vulnerability
+[build-image : build] 
+[build-image : build] To address all issues, run:
+[build-image : build]   npm audit fix
+[build-image : build] 
+[build-image : build] Run `npm audit` for details.
+[build-image : build] npm notice 
+[build-image : build] npm notice New minor version of npm available! 7.15.1 -> 7.20.5
+[build-image : build] npm notice Changelog: <https://github.com/npm/cli/releases/tag/v7.20.5>
+[build-image : build] npm notice Run `npm install -g npm@7.20.5` to update!
+[build-image : build] npm notice 
+[build-image : build] STEP 5: COPY . .
+[build-image : build] STEP 6: EXPOSE 3000
+[build-image : build] STEP 7: CMD ["npm", "start"]
+[build-image : build] STEP 8: COMMIT quay.io/ashutosh_gaur/express-sample-app:5c15fad91996ea40aeb800842062d02cf13f66bb
+[build-image : build] --> a91b190e9c0
+[build-image : build] a91b190e9c0cd245ccd1ac0db7e52deb5fd1475564350744f664779a2d312fbf
+
+[build-image : push] + buildah --storage-driver=overlay push --tls-verify=true --digestfile /workspace/source/image-digest quay.io/ashutosh_gaur/express-sample-app:5c15fad91996ea40aeb800842062d02cf13f66bb docker://quay.io/ashutosh_gaur/express-sample-app:5c15fad91996ea40aeb800842062d02cf13f66bb
+[build-image : push] Getting image source signatures
+[build-image : push] Copying blob sha256:5def4d32b42fb6d87256ac5f6de258253acc570a594036ad01b9d6bda898c5ec
+[build-image : push] Copying blob sha256:6ff94098dca3125f917df25ed8fcae9079c9ab40c338022d84fdec4e42cf6f55
+[build-image : push] Copying blob sha256:ace9a27c01e56038c748285486c474da9d1f9c07f9b72ef437a192be8f7586ce
+[build-image : push] Copying blob sha256:d70a24f36618818e5c04bcfc323746e7f133d034d55f9a204b0b027bfd8b2b38
+[build-image : push] Copying blob sha256:b2d5eeeaba3a22b9b8aa97261957974a6bd65274ebd43e1d81d0a7b8b752b116
+[build-image : push] Copying config sha256:a91b190e9c0cd245ccd1ac0db7e52deb5fd1475564350744f664779a2d312fbf
+[build-image : push] Writing manifest to image destination
+[build-image : push] Copying config sha256:a91b190e9c0cd245ccd1ac0db7e52deb5fd1475564350744f664779a2d312fbf
+[build-image : push] Writing manifest to image destination
+[build-image : push] Writing manifest to image destination
+[build-image : push] Storing signatures
+
+[build-image : digest-to-results] + cat /workspace/source/image-digest
+[build-image : digest-to-results] + tee /tekton/results/IMAGE_DIGEST
+[build-image : digest-to-results] sha256:e93d09dab47caa3bde17ae9853f7b62f79283598dff1b35afee4a9059f49c1c7
+
